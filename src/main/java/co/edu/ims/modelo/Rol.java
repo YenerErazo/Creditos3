@@ -11,7 +11,6 @@ import javax.persistence.Id;
 public class Rol implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_rol;
     private String nombre_rol;
     
     
@@ -19,17 +18,8 @@ public class Rol implements Serializable{
     public Rol() {
     }
 
-    public Rol(Integer id_rol, String nombre_rol) {
-        this.id_rol = id_rol;
+    public Rol(String nombre_rol) {
         this.nombre_rol = nombre_rol;
-    }
-
-    public Integer getId_rol() {
-        return id_rol;
-    }
-
-    public void setId_rol(Integer id_rol) {
-        this.id_rol = id_rol;
     }
 
     public String getNombre_rol() {

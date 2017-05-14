@@ -13,10 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Usuarios implements Serializable{
+public class Usuario implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_usuario;
     private String nombreUsuarios;
     private String correo;
     private String contrasena;
@@ -34,24 +33,16 @@ public class Usuarios implements Serializable{
     
     
 
-    public Usuarios() {
+    public Usuario() {
     }
 
-    public Usuarios(Integer id_usuario, String nombreUsuarios, String correo, String contrasena) {
-        this.id_usuario = id_usuario;
+    public Usuario(String nombreUsuarios, String correo, String contrasena) {
         this.nombreUsuarios = nombreUsuarios;
         this.correo = correo;
         this.contrasena = contrasena;
     }
 
-    public Integer getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(Integer id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
+    
     public String getNombreUsuarios() {
         return nombreUsuarios;
     }
