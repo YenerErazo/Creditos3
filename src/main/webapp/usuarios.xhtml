@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Ejemplo JSF</title>
+    </h:head>
+
+    <h:body>
+        <h1> Usuarios </h1>
+        <h:form>            
+            <p:dataTable id="usuarios" var="usu" value="#{usuarioBean.usuarios}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{usu.idUsuario}" />
+                </p:column>
+                
+                 <p:column headerText="Nombre">
+                     <h:outputText value="#{usu.nombreUsuario}" />
+                </p:column>
+
+                <p:column headerText="Correo">
+                    <h:outputText value="#{usu.correo}" />
+                </p:column>
+                
+                 <p:column headerText="Contreseña">
+                     <h:outputText value="#{usu.contrasena}"  />
+                </p:column>
+
+                <p:column headerText="Identificacion Persona">
+                    <h:outputText value="#{usu.persona.nombre} #{usu.persona.apellido}" />
+                </p:column>
+                
+                               
+            </p:dataTable> 
+            
+            <br />
+            <p:fieldset legend="Agregar" toggleable="true" toggleSpeed="500" style="width: 40%">
+                <h:panelGrid columns="2">
+                    
+                    <p:outputLabel value="Nombre: "/>
+                    <p:inputText value="#{usuarioBean.usuario.nombreUsuario}"  />
+                    
+                    <p:outputLabel value="Correo: "/>
+                    <p:inputText value="#{usuarioBean.usuario.correo}"  />
+                    
+                    <p:outputLabel value="Contraseña: "/>
+                    <p:password id="feedback" value="#{usuarioBean.usuario.contrasena}" feedback="true" />
+                                       
+                    <p:outputLabel value="Identificacion Persona: "/> 
+                    <p:selectOneMenu value="#{usuarioBean.usuario.persona.identificacion}" >
+                        <f:selectItems value="#{usuarioBean.personas}" var="iterador"
+                                       itemLabel="#{iterador.nombre} #{iterador.apellido}" itemValue="#{iterador.identificacion}" />
+                    </p:selectOneMenu>
+                                       
+                    <p:outputLabel value=""/>
+                    <p:commandButton value="Guardar" action="#{usuarioBean.guardar}" update="@form"/>                 
+                </h:panelGrid>
+            </p:fieldset>           
+        </h:form>
+
+    </h:body>
+   
+</html>

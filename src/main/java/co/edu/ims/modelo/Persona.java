@@ -16,9 +16,8 @@ import javax.persistence.TemporalType;
 @Entity
 public class Persona implements Serializable{
         
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-        
-    private String identificacion;
+    @Id
+    private String identificacion;    
     private String nombre;
     private String apellido;
     private String nacionalidad;    
@@ -26,25 +25,11 @@ public class Persona implements Serializable{
     private Date fechaNacimiento;
     private String direccion;
     private String genero;
-    
-    
-  @OneToOne
-  @JoinColumn(name="usuario_id")
-  private Usuario usuarios;
 
     public Persona() {
     }
 
-    public Persona(String identificacion, String nombre, String apellido, String nacionalidad, Date fechaNacimiento, String direccion, String genero) {
-        this.identificacion = identificacion;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.nacionalidad = nacionalidad;
-        this.fechaNacimiento = fechaNacimiento;
-        this.direccion = direccion;
-        this.genero = genero;
-    }
-
+   
    
     public String getIdentificacion() {
         return identificacion;
@@ -101,6 +86,7 @@ public class Persona implements Serializable{
     public void setGenero(String genero) {
         this.genero = genero;
     }
-    
+
+      
         
 }

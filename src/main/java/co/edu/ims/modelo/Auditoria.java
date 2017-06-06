@@ -1,26 +1,30 @@
 package co.edu.ims.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 @Entity
-public class Auditoria {
+public class Auditoria implements Serializable {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idAuditoria;
     private Boolean estado;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaInicio;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaFin;
     
-    @OneToMany 
+    @ManyToOne
     private Usuario id_usuario;
     
-    @OneToMany
+    @ManyToOne
     private Rol id_rol;
 
     public Auditoria() {

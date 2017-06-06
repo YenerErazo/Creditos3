@@ -3,8 +3,6 @@ package co.edu.ims.ejbs;
 
 import co.edu.ims.modelo.Auditoria;
 import co.edu.ims.modelo.Persona;
-import co.edu.ims.modelo.Rol;
-import co.edu.ims.modelo.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,60 +18,48 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 @Stateless
-@Path("/persona")
-public class PersonaEJB {
+@Path("/auditoria")
+public class AuditoriaEJB {
     
+   
      @PersistenceContext(unitName = "controlAccesoPU")
     protected EntityManager em;
         
     @GET
     @Produces("application/json")
     @Path("{id}")
-    public Persona buscar(@PathParam("id") String id){
+    public Auditoria buscar(@PathParam("id") Integer id){
         System.out.println("pasa por aqui...");
-       return em.find(Persona.class , id);
+       return em.find(Auditoria.class , id);
         
     }
     
     @GET
     @Produces("application/json")
-    public List<Persona> buscarTodos(){
-        String jpql = "SELECT per FROM Persona per";
-        TypedQuery<Persona> q = em.createQuery(jpql, Persona.class);
-        List<Persona> resultado = q.getResultList();
+    public List<Auditoria> buscarTodos(){
+        String jpql = "SELECT aud FROM Auditoria aud";
+        TypedQuery<Auditoria> q = em.createQuery(jpql, Auditoria.class);
+        List<Auditoria> resultado = q.getResultList();
         return resultado;
     }
     
-    
-    
-    @GET
-    @Path("/nombre/{nombre}")
-    @Produces("application/json")
-    public List<Persona> buscarPorNombre(@PathParam("nombre") String nombre){
-    String jpql = "SELECT per FROM Persona per WHERE per.nombreUsuario LIKE :pNombre";
-        TypedQuery<Persona> q = em.createQuery(jpql, Persona.class);
-        q.setParameter("pNombre", "%"+nombre+"%");
-        List<Persona> resultado = q.getResultList();
-        return resultado;
-            
-}
     
     
     @POST
     @Produces("application/json")
     @Consumes("application/json")
-    public Persona actualizar(Persona p){
-        em.merge(p);
-        return p;
+    public Auditoria actualizar(Auditoria aud){
+        em.merge(aud);
+        return aud;
     }
     @PUT
     @Produces("application/json")
     @Consumes("application/json")
     
-    public Persona crear(Persona p){
-        em.persist(p);
+    public Auditoria crear(Auditoria aud){
+        em.persist(aud);
         em.flush();
-        return p;
+        return aud;
     }
     
     
@@ -81,12 +67,14 @@ public class PersonaEJB {
     @Path("(id)")
     @Produces("application/json")
     public String eliminar(@PathParam("id") Integer pId){
-        Persona p = em.find(Persona.class, pId);
-        if(p != null){
-            em.remove(p);
+        Auditoria aud = em.find(Auditoria.class, pId);
+        if(aud != null){
+            em.remove(aud);
         }
         return "()";
     }
-
-      
+    
 }
+    
+    
+    

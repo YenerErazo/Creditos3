@@ -4,6 +4,7 @@ package co.edu.ims.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,17 +12,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String nombreUsuarios;
+    private Integer idUsuario;
+    private String nombreUsuario;
     private String correo;
     private String contrasena;
     
+        
+    @OneToOne
+    @JoinColumn(name="persona_id")
     private Persona persona;
-    
+        
     @ManyToMany
     @JoinTable(
             name="Auditoria",
@@ -34,21 +40,25 @@ public class Usuario implements Serializable{
     
 
     public Usuario() {
+        this.persona = new Persona();
     }
 
-    public Usuario(String nombreUsuarios, String correo, String contrasena) {
-        this.nombreUsuarios = nombreUsuarios;
-        this.correo = correo;
-        this.contrasena = contrasena;
+       
+
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    
-    public String getNombreUsuarios() {
-        return nombreUsuarios;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setNombreUsuarios(String nombreUsuarios) {
-        this.nombreUsuarios = nombreUsuarios;
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getCorreo() {
@@ -66,6 +76,23 @@ public class Usuario implements Serializable{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
     
     
     
